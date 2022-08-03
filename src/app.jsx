@@ -6,6 +6,7 @@ import Videos from './components/videos';
 
 const App = () => {
   const [videos, setVideos] = useState([]);
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   var requestOptions = {
     method: 'GET',
@@ -14,7 +15,8 @@ const App = () => {
 
   useEffect(() => {
     fetch(
-      'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=AIzaSyBQRlXx6mkAAEnEfZVM5ZeUpvIYdML_Kxg',
+      'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=' +
+        apiKey,
 
       requestOptions
     )
