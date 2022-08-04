@@ -1,13 +1,33 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Video from './video';
+import { VideosContainer } from './styles/Videos.styled';
 
 const Videos = props => {
-  const mostPopularVideos = props.videos;
+  const youTubeData = props.data;
+  const loadingStatus = props.loading;
+  const error = props.error;
 
   return (
     <>
       <div>
-        <h1>Videos</h1>
-        {mostPopularVideos[0].snippet.title}
+        {loadingStatus && <div>A moment please...</div>}
+        {error && (
+          <div>{`There is a problem fetching the YouTube data - ${error}`}</div>
+        )}
+        <VideosContainer>
+          <>
+            {youTubeData &&
+              youTubeData.items.map(youTubeVideo => (
+                <>
+                  <Video
+                    imgUrl={youTubeVideo.snippet.thumbnails.medium.url}
+                    title={youTubeVideo.snippet.title}
+                    channelTitle={youTubeVideo.snippet.channelTitle}
+                  />
+                </>
+              ))}
+          </>
+        </VideosContainer>
       </div>
     </>
   );

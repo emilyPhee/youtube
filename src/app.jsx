@@ -4,9 +4,26 @@ import Header from './components/header';
 import SideMenu from './components/sideMenu';
 import Videos from './components/videos';
 
+// Styled Component
+import { ThemeProvider } from 'styled-components';
+import GlobalStyles from './components/styles/Global';
+import { Container } from './components/styles/Container.styled';
+import { RightSideContainer } from './components/styles/RightSideContainer.styled';
+
+const theme = {
+  colors: {
+    background: 'black',
+    mainColor: 'red',
+  },
+  mobile: '768px',
+};
+
 const App = () => {
-  const [videos, setVideos] = useState([]);
   const apiKey = process.env.REACT_APP_API_KEY;
+
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   var requestOptions = {
     method: 'GET',
@@ -20,19 +37,40 @@ const App = () => {
 
       requestOptions
     )
-      .then(response => response.json())
-      .then(data => {
-        setVideos(data.items);
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(
+            `This is an HTTP error: THe status is ${response.status}`
+          );
+        }
+        return response.json();
       })
-      .catch(error => console.log('error', error));
+      .then(data => {
+        setData(data);
+      })
+      .catch(error => {
+        console.log('error', error);
+        setError(error.message);
+        setData(null);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   return (
-    <>
-      <Header />
-      <SideMenu />
-      <Videos videos={videos} />
-    </>
+    <ThemeProvider theme={theme}>
+      <>
+        <GlobalStyles />
+        <Header />
+        <Container>
+          <SideMenu />
+          <RightSideContainer>
+            <Videos data={data} loading={loading} error={error} />
+          </RightSideContainer>
+        </Container>
+      </>
+    </ThemeProvider>
   );
 };
 

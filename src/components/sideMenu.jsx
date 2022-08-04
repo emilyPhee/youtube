@@ -1,8 +1,12 @@
 import React from 'react';
 
+import { LeftSideContainer } from './styles/LeftSideContainer.styled';
+
 const SideMenu = props => (
   <>
-    <h1>SideBar</h1>
+    <LeftSideContainer>
+      <h1>SideBar</h1>
+    </LeftSideContainer>
   </>
 );
 
