@@ -10,7 +10,9 @@ const Videos = props => {
   return (
     <>
       <div>
-        {loadingStatus && <div>A moment please...</div>}
+        {loadingStatus && (
+          <div style={{ color: '#fff' }}>A moment please...</div>
+        )}
         {error && (
           <div>{`There is a problem fetching the YouTube data - ${error}`}</div>
         )}

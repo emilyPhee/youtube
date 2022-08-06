@@ -9,6 +9,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './components/styles/Global';
 import { Container } from './components/styles/Container.styled';
 import { RightSideContainer } from './components/styles/RightSideContainer.styled';
+import { LeftSideContainer } from './components/styles/LeftSideContainer.styled';
 
 const theme = {
   colors: {
@@ -25,26 +26,37 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  var requestOptions = {
+  const [query, setQuery] = useState('');
+
+  const requestOptions = {
     method: 'GET',
     redirect: 'follow',
   };
 
-  useEffect(() => {
-    fetch(
-      'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=' +
-        apiKey,
+  const querySearchResult = enteredQuery => {
+    setQuery(enteredQuery);
+  };
 
-      requestOptions
-    )
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(
-            `This is an HTTP error: THe status is ${response.status}`
-          );
-        }
-        return response.json();
-      })
+  const getYoutubeData = query => {
+    const api =
+      query !== ''
+        ? 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=' +
+          query +
+          '&key='
+        : 'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=';
+
+    return fetch(api + apiKey, requestOptions).then(response => {
+      if (!response.ok) {
+        throw new Error(
+          `This is an HTTP error: THe status is ${response.status}`
+        );
+      }
+      return response.json();
+    });
+  };
+
+  useEffect(() => {
+    getYoutubeData(query)
       .then(data => {
         setData(data);
       })
@@ -56,15 +68,17 @@ const App = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [query]);
 
   return (
     <ThemeProvider theme={theme}>
       <>
         <GlobalStyles />
-        <Header />
+        <Header querySearchResult={querySearchResult} />
         <Container>
-          <SideMenu />
+          <LeftSideContainer>
+            <SideMenu />
+          </LeftSideContainer>
           <RightSideContainer>
             <Videos data={data} loading={loading} error={error} />
           </RightSideContainer>

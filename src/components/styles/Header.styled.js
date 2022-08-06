@@ -5,6 +5,8 @@ export const HeaderStyle = styled.div`
   justify-content: center;
   padding: 1rem;
   background-color: #202020;
+  position: sticky;
+  top: 0;
 
   & input {
     background-color: black;
