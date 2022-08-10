@@ -20,13 +20,11 @@ const Videos = props => {
           <>
             {youTubeData &&
               youTubeData.items.map(youTubeVideo => (
-                <>
-                  <Video
-                    imgUrl={youTubeVideo.snippet.thumbnails.medium.url}
-                    title={youTubeVideo.snippet.title}
-                    channelTitle={youTubeVideo.snippet.channelTitle}
-                  />
-                </>
+                <Video
+                  imgUrl={youTubeVideo.snippet.thumbnails.medium.url}
+                  title={youTubeVideo.snippet.title}
+                  channelTitle={youTubeVideo.snippet.channelTitle}
+                />
               ))}
           </>
         </VideosContainer>

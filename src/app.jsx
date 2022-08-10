@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './app.css';
 import Header from './components/header';
-import SideMenu from './components/sideMenu';
+
 import Videos from './components/videos';
 
 // Styled Component
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './components/styles/Global';
 import { Container } from './components/styles/Container.styled';
-import { RightSideContainer } from './components/styles/RightSideContainer.styled';
-import { LeftSideContainer } from './components/styles/LeftSideContainer.styled';
+import { VideosContainer } from './components/styles/Videos.styled';
 
 const theme = {
   colors: {
@@ -56,6 +55,7 @@ const App = () => {
   };
 
   useEffect(() => {
+    // document.title = 'YouTube';
     getYoutubeData(query)
       .then(data => {
         setData(data);
@@ -74,14 +74,13 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <>
         <GlobalStyles />
-        <Header querySearchResult={querySearchResult} />
+
         <Container>
-          <LeftSideContainer>
-            <SideMenu />
-          </LeftSideContainer>
-          <RightSideContainer>
+          <Header querySearchResult={querySearchResult} />
+
+          <VideosContainer>
             <Videos data={data} loading={loading} error={error} />
-          </RightSideContainer>
+          </VideosContainer>
         </Container>
       </>
     </ThemeProvider>

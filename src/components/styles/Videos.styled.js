@@ -3,7 +3,14 @@ import styled from 'styled-components';
 export const VideosContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  border-top: 1px solid #505152;
+  justify-content: center;
+  /* border-top: 0.1px solid #505152; */
+
+  height: 100vh;
+  width: 100vw;
+
+  overflow-y: scroll;
+  background-color: #181818;
 `;
 
 export const VideoStyle = styled.div`

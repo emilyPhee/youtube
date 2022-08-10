@@ -8,7 +8,7 @@ import { faCompass } from '@fortawesome/free-solid-svg-icons';
 const SideMenu = props => (
   <>
     <LeftSideContainer>
-      {/* <div>
+      <div>
         <FontAwesomeIcon icon={faHouse} color="#fff" />
         <h4>Home</h4>
       </div>
@@ -18,15 +18,15 @@ const SideMenu = props => (
         <h4>Explore</h4>
       </div>
 
-      <div>
+      {/* <div>
         <FontAwesomeIcon
           icon={<FontAwesomeIcon icon={} />}
           color="#fff"
         />
         <h4>Shorts</h4>
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         <FontAwesomeIcon icon={faHouse} color="#fff" />
         <h4>Home</h4>
       </div> */}
