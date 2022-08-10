@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import './app.css';
 import Header from './components/header';
 
 import Videos from './components/videos';
-
+import VideoDetails from './components/videoDetails';
 // Styled Component
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './components/styles/Global';
@@ -74,14 +75,30 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <>
         <GlobalStyles />
+        <BrowserRouter>
+          <Container>
+            <Header querySearchResult={querySearchResult} />
 
-        <Container>
-          <Header querySearchResult={querySearchResult} />
+            {/* Router */}
+            <Routes>
+              <Route
+                index
+                path="/videos"
+                element={
+                  <Videos data={data} loading={loading} error={error}></Videos>
+                }
+              />
+              <Route
+                path="/videos/:title"
+                element={<VideoDetails></VideoDetails>}
+              ></Route>
+            </Routes>
 
-          <VideosContainer>
-            <Videos data={data} loading={loading} error={error} />
-          </VideosContainer>
-        </Container>
+            {/* <VideosContainer>
+              <Videos data={data} loading={loading} error={error} />
+            </VideosContainer> */}
+          </Container>
+        </BrowserRouter>
       </>
     </ThemeProvider>
   );

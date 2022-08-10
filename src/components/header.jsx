@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { HeaderStyle } from './styles/Header.styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +18,9 @@ const Header = props => {
           icon={faBars}
           style={{ padding: '15px', fontSize: '1.5rem' }}
         ></FontAwesomeIcon>
-        <img src={YoutubeLogo} alt="" style={{ marginRight: '1rem' }} />
+        <Link to={'/videos'}>
+          <img src={YoutubeLogo} alt="" style={{ marginRight: '1rem' }} />
+        </Link>
         YouTube
       </div>
       <div>

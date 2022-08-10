@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import Video from './video';
 import { VideosContainer } from './styles/Videos.styled';
 
@@ -20,11 +22,16 @@ const Videos = props => {
           <>
             {youTubeData &&
               youTubeData.items.map(youTubeVideo => (
-                <Video
-                  imgUrl={youTubeVideo.snippet.thumbnails.medium.url}
-                  title={youTubeVideo.snippet.title}
+                <Link
+                  to={`/videos/${youTubeVideo.snippet.title}`}
                   channelTitle={youTubeVideo.snippet.channelTitle}
-                />
+                >
+                  <Video
+                    imgUrl={youTubeVideo.snippet.thumbnails.medium.url}
+                    title={youTubeVideo.snippet.title}
+                    channelTitle={youTubeVideo.snippet.channelTitle}
+                  />
+                </Link>
               ))}
           </>
         </VideosContainer>
