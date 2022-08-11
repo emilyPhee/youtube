@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './app.css';
 import Header from './components/header';
 
@@ -9,7 +9,6 @@ import VideoDetails from './components/videoDetails';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './components/styles/Global';
 import { Container } from './components/styles/Container.styled';
-import { VideosContainer } from './components/styles/Videos.styled';
 
 const theme = {
   colors: {
@@ -78,25 +77,19 @@ const App = () => {
         <BrowserRouter>
           <Container>
             <Header querySearchResult={querySearchResult} />
-
-            {/* Router */}
             <Routes>
               <Route
                 index
-                path="/videos"
+                path="/youtube"
                 element={
                   <Videos data={data} loading={loading} error={error}></Videos>
                 }
               />
               <Route
-                path="/videos/:title"
+                path="/youtube/:title"
                 element={<VideoDetails></VideoDetails>}
               ></Route>
             </Routes>
-
-            {/* <VideosContainer>
-              <Videos data={data} loading={loading} error={error} />
-            </VideosContainer> */}
           </Container>
         </BrowserRouter>
       </>

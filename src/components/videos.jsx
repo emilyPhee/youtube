@@ -23,8 +23,12 @@ const Videos = props => {
             {youTubeData &&
               youTubeData.items.map(youTubeVideo => (
                 <Link
-                  to={`/videos/${youTubeVideo.snippet.title}`}
-                  channelTitle={youTubeVideo.snippet.channelTitle}
+                  to={`/youtube/${youTubeVideo.snippet.title}`}
+                  state={{
+                    youtubeVideoData: youTubeVideo.snippet,
+                    youtubeVideoId: youTubeVideo.id,
+                  }}
+                  style={{ textDecoration: 'none' }}
                 >
                   <Video
                     imgUrl={youTubeVideo.snippet.thumbnails.medium.url}

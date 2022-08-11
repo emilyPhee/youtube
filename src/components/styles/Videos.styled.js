@@ -4,7 +4,6 @@ export const VideosContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* border-top: 0.1px solid #505152; */
 
   height: 100vh;
   width: 100vw;
